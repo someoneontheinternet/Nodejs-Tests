@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <h1 class="page-header center">Blog</h1>
+
+  <div class="container">
+
+    <!-- Template --> <!--
+
+      Title: <h3>{Heading}</h3> - <a>{User}</a>
+      Content: <div><p>
+        {
+          content that can have styling
+        }
+      Footer - floating end: {Date created, Date edited}
+
+    -->
+
+    <!-- Example
+    <li class="blog-item">
+      <div class="head page-header">
+        <h3>My Blog 1 <span> - Created by TheLegend27</span> </h3>
+      </div>
+      <div class="body">
+        <p class="content">
+          <h4>Header</h4>
+          <p>
+            This is some paragraph. This is my new blog that I will be using for IT.
+          </p>
+        </p>
+      </div>
+      <div class="buttom">
+        <p>
+          - Created on Date Last edited on Date 2
+        </p>
+      </div>
+    </li>
+    -->
+
+    <div id="wrapper">
+      <ul id="blog-wrapper"></ul>
+    </div>
+
+  </div>
+</body>
+<footer>
+  <!-- JS -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+
+    function getPosts() {
+      
+      var blog = $('#blog-wrapper');
+      blog.remove();
+      $('#wrapper').append("<ul id='blog-wrapper'></ul>");
+      blog = $('#blog-wrapper');
+
+      $.get('/blog', function(data) {
+
+        for (var i = 0; i < data.length; i++) {
+          var item = data[i];
+
+          blog.append("<li class='blog-item'>");
+          var temp = "<h3>" + item.title + "<span> - Created by " + item.author +"</span></h3>";
+          blog.append("<div class='head page-header'>" + temp + "</div>");
+          blog.append("<div class='body'><p class='content'>" + item.body + "</p></div>");
+          blog.append("<div class='buttom'><p> - Created on " + item.created + " Last edited on " + item.edited + "</p></div>");
+          blog.append("</li>");
+        }
+
+      });
+    }
+
+    getPosts();
+
+  </script>
+
+</footer>
+</html>

@@ -1,0 +1,24 @@
+* {
+   list-style-type: none;
+}
+
+.center {
+  text-align: center;
+}
+
+#blog-wrapper {
+  padding-left: 7%;
+  padding-right: 7%;
+}
+
+.blog-item .head h3 {
+  text-align: center;
+}
+
+.blog-item .head h3 span{
+  font-size: 12px;
+}
+
+.buttom p {
+  float: right;
+}
